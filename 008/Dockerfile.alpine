@@ -1,0 +1,9 @@
+FROM golang:1.14.9-alpine3.12
+
+WORKDIR /app
+
+COPY main.go .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+
+CMD ["/app/main"]
