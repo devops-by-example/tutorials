@@ -18,4 +18,4 @@ spec:
       - name: app
         image: 424432388155.dkr.ecr.us-east-1.amazonaws.com/app:v0.1.0
         ports:
-        - containerPort: 80
+        - containerPort: 8081
