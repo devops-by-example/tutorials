@@ -9,6 +9,7 @@
 
 ### Create EKS cluster
 ```bash
+$ cd 009
 $ eksctl create cluster -f eksctl-cluster.yaml
 ```
 
