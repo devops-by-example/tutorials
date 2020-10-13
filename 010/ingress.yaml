@@ -2,6 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  namespace: default
   name: hello-world-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
