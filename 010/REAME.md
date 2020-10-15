@@ -48,7 +48,7 @@ $ minikube service hello-app-service --url
 ### Configure dnsmasq
 ```bash
 cat << EOF > /usr/local/etc/dnsmasq.d/development.conf
-address=/.pvt/192.168.64.3
+address=/.pvt/192.168.64.4
 EOF
 ```
 
