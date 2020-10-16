@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: devops-by-example-v2
+  region: us-east-1
+
+nodeGroups:
+  - name: nodes-general
+    labels:
+        role: workers
+    instanceType: t2.small
+    desiredCapacity: 1
+    volumeSize: 20

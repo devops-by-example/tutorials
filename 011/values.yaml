@@ -61,7 +61,7 @@ controller:
 
   ## Name of the ingress class to route through this controller
   ##
-  ingressClass: sample-nginx
+  ingressClass: nginx
 
   # labels to add to the pod container metadata
   podLabels: {}

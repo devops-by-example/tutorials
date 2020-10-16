@@ -1,5 +1,10 @@
 # Nginx Ingress Controller Helm
 
+### Create Kubernetes Cluster on AWS
+```bash
+$ eksctl create cluster -f 011/eksctl-cluster.yaml
+```
+
 ### Get values file from
 ```bash
 https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
@@ -13,4 +18,10 @@ $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ### Install Nginx Ingress Helm Chart
 ```bash
 $ helm install sample-ingress ingress-nginx/ingress-nginx -f 011/values.yaml
+```
+
+### Clean Up
+```bash
+$ helm repo remove ingress-nginx
+$ eksctl delete cluster -f 011/eksctl-cluster.yaml
 ```
