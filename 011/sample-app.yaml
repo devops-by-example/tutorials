@@ -39,15 +39,15 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: sample-nginx
+    kubernetes.io/ingress.class: nginx
   name: hello-app
   namespace: default
 spec:
   rules:
-    - host: www.example.com
+    - host: www.devopsbyexample.io
       http:
         paths:
           - backend:
-              serviceName: exampleService
+              serviceName: hello-app-service
               servicePort: 8080
             path: /

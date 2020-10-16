@@ -20,6 +20,16 @@ $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 $ helm install sample-ingress ingress-nginx/ingress-nginx -f 011/values.yaml
 ```
 
+### Deploy Sample App
+```bash
+$ kubectl apply -f 011/sample-app.yaml
+```
+
+### Verify DNS
+```bash
+$ dig +short www.devopsbyexample.io
+```
+
 ### Clean Up
 ```bash
 $ helm repo remove ingress-nginx
