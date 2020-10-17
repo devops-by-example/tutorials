@@ -1,23 +1,35 @@
-# Nginx Ingress Controller Helm
+# Nginx Admission Webhook | Overview and Demo
 
-### Create Kubernetes Cluster on AWS
+
+### Create namespace
 ```bash
-$ eksctl create cluster -f 011/eksctl-cluster.yaml
+$ kubectl apply -f 012/ingress-nginx/namespace.yaml
 ```
 
+### Deploy Nginx Webhook
+```bash
+$ kubectl apply -f 012/ingress-nginx/admission-webhooks
+```
+
+### Deploy Nginx Ingress Using YAML
+```bash
+$ kubectl apply -f 012/ingress-nginx
+```
+
+### Check Ingress pods, service, and webhook
+```bash
+$ kubectl get pods -n ingress
+$ kubectl get svc -n ingress
+$ kubectl get ValidatingWebhookConfiguration
+```
 
 ### Deploy Sample App
 ```bash
-$ kubectl apply -f 011/sample-app.yaml
+$ kubectl apply -f 012/sample-app.yaml
 ```
 
-### Verify DNS
+### Verify App
 ```bash
-$ dig +short www.devopsbyexample.io
-```
-
-### Clean Up
-```bash
-$ helm repo remove ingress-nginx
-$ eksctl delete cluster -f 011/eksctl-cluster.yaml
+$ kubectl get pods -n default
+$ kubectl get ingress -n default
 ```
