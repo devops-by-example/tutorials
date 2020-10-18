@@ -86,7 +86,6 @@ $ kubectl get pods -n default
 $ kubectl port-forward svc/grafana 3000 -n default
 ```
 
-
 ### Verify DNS
 ```bash
 $ dig +short www.devopsbyexample.io
