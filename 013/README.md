@@ -105,7 +105,7 @@ do
 done
 ```
 
-### Cleanup
+# Cleanup
 ```bash
-$ eksctl delete cluster -f 013/eksctl-cluster.yaml
+$ eksctl delete cluster -f 013/00-eksctl/eksctl-cluster.yaml
 ```
