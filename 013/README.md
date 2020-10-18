@@ -2,7 +2,7 @@
 
 ### Create Kubernetes Cluster
 ```bash
-$ eksctl create cluster -f 013/eksctl-cluster.yaml
+$ eksctl create cluster -f 013/00-eksctl/eksctl-cluster.yaml
 ```
 
 ### Create CRD (Custom Resource Definitions)
