@@ -15,51 +15,55 @@ $ kubectl apply -f lessons/013/01-prometheus-operator-crd
 
 ### Deploy Prometheus Operator
 ```bash
-$ kubectl apply -f lessons/013/02-rbac/prometheus-operator-crd
+$ kubectl apply -f lessons/013/02-prometheus-operator
 $ kubectl get pods -n default
 ```
 
 ###  Deploy Prometheus
 ```bash
-$ kubectl apply -f lessons/013/02-rbac/prometheus
+$ kubectl apply -f lessons/013/03-prometheus
 $ kubectl get pods -n default
+$ kubectl logs -f prometheus-prometheus-0 prometheus
 ```
 
 ---
 
 ### Create Namespace Ingress
 ```bash
-$ kubectl apply -f lessons/013/03-ingress-nginx/namespace.yaml
+$ kubectl apply -f lessons/013/04-ingress-nginx/namespace.yaml
 ```
 
 ### Deploy Nginx Admission Webhook
 ```bash
-$ kubectl apply -f lessons/013/03-ingress-nginx/admission-webhooks
+$ kubectl apply -f lessons/013/04-ingress-nginx/admission-webhooks
 ```
 
 ### Deploy Nginx Ingress Controller
 ```bash
-$ kubectl apply -f lessons/013/03-ingress-nginx
+$ kubectl apply -f lessons/013/04-ingress-nginx
 $ kubectl get pods -n ingress
 ```
 
 ---
 
-### Deploy Prometheus
-```bash
-$ kubectl apply -f lessons/013/04-prometheus
-$ kubectl get pods -n default
-$ kubectl logs -f prometheus-prometheus-0 prometheus
-```
-
 ### Create ServiceMonitor for Nginx Controller
 ```bash
-$ kubectl apply -f 013/servicemonitor
+$ kubectl apply -f lessons/013/05-servicemonitor
+$ kubectl get servicemonitors
 ```
 
 ### Check Prometheus Targets
 ```bash
 $ kubectl port-forward svc/prometheus 9090:9090 -n default
+```
+
+---
+
+### Deploy Sample App
+```bash
+$ kubectl apply -f lessons/013/07-sample-app
+$ kubectl get pods -n default
+$ kubectl get ingress -n default
 ```
 
 ### Create DNS record
@@ -82,15 +86,10 @@ $ kubectl get pods -n default
 $ kubectl port-forward svc/grafana 3000 -n default
 ```
 
-### Deploy Sample App
-```bash
-$ kubectl apply -f lessons/013/07-sample-app
-```
 
-### Check Sample App
+### Verify DNS
 ```bash
-$ kubectl get pods -n default
-$ kubectl get ingress -n default
+$ dig +short www.devopsbyexample.io
 ```
 
 ### Script to simulate 2xx requests
