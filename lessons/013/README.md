@@ -2,15 +2,18 @@
 
 ### Create Kubernetes Cluster
 ```bash
-$ eksctl create cluster -f 013/00-eksctl/eksctl-cluster.yaml
+$ eksctl create cluster -f lessons/013/00-eksctl/eksctl-cluster.yaml
+$ kubectl get svc -n default
 ```
 
-### Create CRD (Custom Resource Definitions)
+---
+
+### Create CRD (Custom Resource Definitions) for Prometheus Operator
 ```bash
-$ kubectl apply -f 013/prometheus-operator-crd
+$ kubectl apply -f 013/01-prometheus-operator-crd
 ```
 
-### Create RBAC (Role-based access control)
+### Create RBAC (Role-based access control) Prometheus Operator
 ```bash
 $ kubectl apply -f 013/rbac/prometheus-operator-crd
 $ kubectl apply -f 013/rbac/prometheus-operator
@@ -27,6 +30,8 @@ $ kubectl apply -f 013/prometheus
 $ kubectl get pods -n default
 $ kubectl logs -f prometheus-prometheus-0 prometheus
 ```
+
+---
 
 ### Create Namespace Ingress
 ```bash
@@ -62,6 +67,8 @@ $ kubectl port-forward svc/prometheus 9090:9090 -n default
 ```bash
 $ kubectl get svc -n ingress
 ```
+
+---
 
 ### Deploy Grafana
 ```bash
