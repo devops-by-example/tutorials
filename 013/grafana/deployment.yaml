@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      serviceAccountName: grafana
+      # securityContext:
+      #   fsGroup: 472
+      #   runAsUser: 472
+      # initContainers:
+      # - name: init-chown-data
+      #   image: "busybox:latest"
+      #   imagePullPolicy: IfNotPresent
+      #   securityContext:
+      #     runAsUser: 0
+      #   command: ["chown", "-R", "472:472", "/var/lib/grafana"]
+      #   resources:
+      #     limits:
+      #       cpu: 100m
+      #       memory: 128Mi
+      #     requests:
+      #       cpu: 100m
+      #       memory: 128Mi
+      containers:
+      - name: grafana
+        image: "grafana/grafana:7.2.1"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: "/etc/grafana/grafana.ini"
+          subPath: grafana.ini
+        ports:
+        - name: grafana
+          containerPort: 3000
+          protocol: TCP
+        env:
+        - name: GF_SECURITY_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: grafana
+              key: admin-user
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: grafana
+              key: admin-password
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 60
+          timeoutSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      volumes:
+      - name: config
+        configMap:
+          name: grafana

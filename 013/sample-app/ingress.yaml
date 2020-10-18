@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: sample-nginx
+  name: hello-app
+  namespace: default
+spec:
+  rules:
+    - host: www.devopsbyexample.io
+      http:
+        paths:
+          - backend:
+              serviceName: hello-app-service
+              servicePort: 8080
+            path: /
+          - backend:
+              serviceName: missing-backend
+              servicePort: 8080
+            path: /do-not-exists
