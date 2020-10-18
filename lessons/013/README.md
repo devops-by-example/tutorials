@@ -10,47 +10,46 @@ $ kubectl get svc -n default
 
 ### Create CRD (Custom Resource Definitions) for Prometheus Operator
 ```bash
-$ kubectl apply -f 013/01-prometheus-operator-crd
+$ kubectl apply -f lessons/013/01-prometheus-operator-crd
 ```
 
-### Create RBAC (Role-based access control) Prometheus Operator
+### Deploy Prometheus Operator
 ```bash
-$ kubectl apply -f 013/rbac/prometheus-operator-crd
-$ kubectl apply -f 013/rbac/prometheus-operator
-$ kubectl apply -f 013/rbac/prometheus
-```
-
-### Deploy Prometheus
-```bash
-$ kubectl apply -f 013/prometheus
-```
-
-### Check Prometheus
-```bash
+$ kubectl apply -f lessons/013/02-rbac/prometheus-operator-crd
 $ kubectl get pods -n default
-$ kubectl logs -f prometheus-prometheus-0 prometheus
+```
+
+###  Deploy Prometheus
+```bash
+$ kubectl apply -f lessons/013/02-rbac/prometheus
+$ kubectl get pods -n default
 ```
 
 ---
 
 ### Create Namespace Ingress
 ```bash
-$ kubectl apply -f 013/ingress-nginx/namespace.yaml
+$ kubectl apply -f lessons/013/03-ingress-nginx/namespace.yaml
 ```
 
 ### Deploy Nginx Admission Webhook
 ```bash
-$ kubectl apply -f 013/ingress-nginx/admission-webhooks
+$ kubectl apply -f lessons/013/03-ingress-nginx/admission-webhooks
 ```
 
 ### Deploy Nginx Ingress Controller
 ```bash
-$ kubectl apply -f 013/ingress-nginx
+$ kubectl apply -f lessons/013/03-ingress-nginx
+$ kubectl get pods -n ingress
 ```
 
-### Check Nginx Controller
+---
+
+### Deploy Prometheus
 ```bash
-$ kubectl get pods -n ingress
+$ kubectl apply -f lessons/013/04-prometheus
+$ kubectl get pods -n default
+$ kubectl logs -f prometheus-prometheus-0 prometheus
 ```
 
 ### Create ServiceMonitor for Nginx Controller
@@ -72,7 +71,7 @@ $ kubectl get svc -n ingress
 
 ### Deploy Grafana
 ```bash
-$ kubectl apply -f 013/grafana
+$ kubectl apply -f lessons/013/06-grafana
 $ kubectl get pods -n default
 ```
 
@@ -85,7 +84,7 @@ $ kubectl port-forward svc/grafana 3000 -n default
 
 ### Deploy Sample App
 ```bash
-$ kubectl apply -f 013/sample-app
+$ kubectl apply -f lessons/013/07-sample-app
 ```
 
 ### Check Sample App
@@ -114,5 +113,5 @@ done
 
 # Cleanup
 ```bash
-$ eksctl delete cluster -f 013/00-eksctl/eksctl-cluster.yaml
+$ eksctl delete cluster -f lessons/013/00-eksctl/eksctl-cluster.yaml
 ```
