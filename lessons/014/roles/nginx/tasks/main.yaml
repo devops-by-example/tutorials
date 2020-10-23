@@ -3,7 +3,7 @@
   apt:
     name: nginx
     state: latest
-- name: Make sure a Nginx is running
+- name: Make sure Nginx is running
   systemd:
     state: started
     name: nginx
