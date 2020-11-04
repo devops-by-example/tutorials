@@ -6,22 +6,6 @@ $ eksctl create cluster -f lessons/021/eksctl-cluster.yaml
 $ kubectl get svc -n default
 ```
 
-### Install Helm CLI
-```bash
-# Mac
-$ brew install helm
-
-# Windows
-$ choco install kubernetes-helm
-
-# Debian/Ubuntu
-curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-sudo apt-get install apt-transport-https --yes
-echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update
-sudo apt-get install helm
-```
-
 ### Initialize a Helm Chart Repository
 ```bash
 $ helm repo add stable https://charts.helm.sh/stable
@@ -35,11 +19,6 @@ $ helm search repo stable
 ### Create Hello-world Example
 ```bash
 $ helm create hello-wolrd
-```
-
-### List Helm Releases
-```bash
-$ helm ls
 ```
 
 ### Install Hello-worls Helm Chart
