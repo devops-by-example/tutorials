@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "files",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObjectAcl",
+        "s3:PutObject",
+        "s3:GetObjectAcl",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::helm.devopsbyexample.io/charts/*",
+        "arn:aws:s3:::helm.devopsbyexample.io/charts"
+      ]
+    },
+    {
+      "Sid": "bucket",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::helm.devopsbyexample.io"
+    }
+  ]
+}
