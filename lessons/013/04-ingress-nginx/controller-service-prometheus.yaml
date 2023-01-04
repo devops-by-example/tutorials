@@ -12,7 +12,7 @@ spec:
   ports:
     - name: prometheus
       port: 10254
-      targetPort: prometheus
+      targetPort: 10254
   selector:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/component: controller
